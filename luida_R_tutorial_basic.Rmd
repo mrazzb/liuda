@@ -1,0 +1,172 @@
+---
+title: "Liuda R tutorial"
+author: "O.M."
+date: "2024-11-23"
+output: html_document
+---
+
+
+Lets begin from the beggining
+```{r}
+print("Hello World")
+```
+Here Print your command
+```{r}
+
+```
+
+
+##Objects##
+Then lets go to a type of objects
+First one is numerical - numbers
+```{r}
+1
+typeof(1)
+```
+
+```{r}
+1/2
+1.5
+typeof(1/2)
+typeof(1.5)
+```
+Integers are doubles but without decimal
+```{r}
+typeof(3.14)
+as.integer(3.14) 
+```
+
+
+Now to strings - simplest string is a character - or a bunch of them
+String should be separated by either "" or '', and represent line of text whihc shouldnt be treates as number
+```{r}
+"Hello"
+typeof("Hello")
+```
+Numeric in "" brackets would also be treated as character
+```{r}
+"2"
+typeof("2")
+```
+
+Last type is a factor
+Factor is type of character whihc can have only some specuific values 
+c() fucntion is used to concatenate any objects in one string
+```{r}
+1
+factor(c(1, 2))
+```
+
+```{r}
+c(1, 4, 7, 1)
+```
+
+```{r}
+c("f", "u", "c", "k")
+```
+You can concatenate any type of data
+```{r}
+c(1, 2, "g")
+```
+But it would be treated as a character if at least one character is there
+```{r}
+typeof(c(1, 2, "g"))
+typeof(c(1, 2))
+```
+
+
+What would be a type of  next expressions:
+one
+_
+i4u
+try them here
+```{r}
+
+```
+
+
+#Operators and indexes#
+Operators in R are mostly the same as in other languages 
+```{r}
+1 + 1
+
+```
+
+```{r}
+1 - 1
+```
+
+```{r}
+2/4
+```
+
+```{r}
+2*4
+```
+square root
+```{r}
+sqrt(4)
+```
+
+```{r}
+2^2
+```
+logarithm on base 2
+```{r}
+log(2)
+```
+logarithm on base 10
+```{r}
+log10(2)
+```
+trigonometric
+```{r}
+cos(2)
+sin(2)
+tan(2)
+```
+For comparison you can use classic >, < =>, <=, and == for checking if two values are equal
+```{r}
+1>2
+2>=2
+"two"=="two"
+```
+
+
+
+
+To assign value to a varible you can use either = or <- / ->
+But usage of = for assigemnt is disregarded
+```{r}
+a<-1
+a
+```
+
+
+```{r}
+2->b
+b
+```
+
+
+```{r}
+c=3
+c
+```
+Please write a compariosn where you took a sum of logartyhm value of 5 and 4 in 5 degree and check if it is more than square root of 10900
+Then assign result of this test to a variable and check its class
+```{r}
+
+```
+
+
+
+
+More complex objects
+To get acces to a certain element of a list you need to use [] brackets
+Important - in R we are starting to count from 1 not from 0
+```{r}
+our_list<-c(10:20)#using : you will get sequantialy all numbers between first and second
+our_list[2]
+```
+
