@@ -1,0 +1,560 @@
+---
+title: "Liuda R tutorial"
+author: "O.M."
+date: "2024-11-23"
+output: html_document
+---
+
+
+```{r}
+print("Hello World")
+```
+
+Exercise:
+Replace "Hello World" with your name or a short greeting of your choice.
+```{r}
+
+```
+
+Objects in R
+Numerical Data
+Numerical values are the most basic data type in R.
+
+```{r}
+1
+typeof(1)
+```
+
+Perform arithmetic operations:
+```{r}
+1 / 2
+1.5
+typeof(1/2)
+typeof(1.5)
+```
+Note: Integers are a subset of doubles, but without decimals. Convert a double to an integer:
+
+```{r}
+as.integer(3.14)
+```
+
+
+Exercise:
+Create and manipulate numerical data, then check its type.
+```{r}
+
+```
+
+Character Data (Strings)
+Strings represent text, enclosed in double " or single ' quotes.
+
+
+```{r}
+"Hello"
+typeof("Hello")
+```
+
+Even numbers in quotes are treated as characters:
+```{r}
+"2"
+typeof("2")
+```
+
+Exercise:
+Write your favorite quote as a string and check its type.
+```{r}
+
+```
+
+Factors
+Factors are categorical variables with predefined levels.
+
+```{r}
+factor(c("red", "blue", "green"))
+```
+
+Concatenate using c():
+```{r}
+c(1, 4, 7)
+c("data", "science", "R")
+```
+
+```{r}
+c(1, 2, "analysis")
+typeof(c(1, 2, "analysis"))
+```
+
+
+Create a factor with days of the week.
+Mix numbers and characters in a concatenation.
+```{r}
+
+```
+
+
+
+Variables in R
+Variables store data and can be assigned using <-, ->, or =.
+```{r}
+x <- 5
+x
+
+5 -> y
+y
+
+b = "Hello"
+b
+```
+
+Rules for Variable Names
+Must start with a letter.
+Can contain letters, numbers, dots, or underscores.
+Cannot contain spaces or start with a number.
+
+```{r}
+valid_variable <- 10
+anotherValid.variable <- 20
+```
+
+Exercise:
+Create variables with valid names storing your age, favorite number, or text.
+Try creating a variable with an invalid name and observe the error.
+```{r}
+
+```
+
+
+Structured and Unstructured Data
+Structured Data
+Structured data is organized into rows and columns, like in a table or dataframe.
+
+```{r}
+df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 35),
+  Score = c(90, 85, 88)
+)
+df
+```
+Access elements:
+```{r}
+df$Name      # Access the 'Name' column
+df[1, ]      # Access the first row
+df[1, "Age"] # Access the 'Age' value of the first row
+```
+
+Exercise:
+Create a dataframe with your own data (e.g., Name, Hobby, Favorite Number).
+Access specific rows or columns.
+```{r}
+
+```
+
+Unstructured Data
+Unstructured data lacks a predefined format, like text, images, or raw sensor data.
+```{r}
+text <- "R is great for data analysis and visualization!"
+nchar(text)  # Count characters
+strsplit(text, " ")  # Split into words
+```
+
+Exercise:
+Write a sentence as unstructured data. Count the words in it.
+Split the text into individual words and analyze their length with len() function.
+```{r}
+
+```
+
+Comparing Structured and Unstructured Data
+```{r}
+structured <- data.frame(
+  Category = c("A", "B", "C"),
+  Value = c(10, 20, 30)
+)
+structured
+
+unstructured <- "Category A has 10 units, B has 20, and C has 30."
+unstructured
+```
+
+
+
+Data frames
+Working with Different Types of Variables in a Dataframe
+A dataframe in R is a structured collection of data where each column can store a different type of variable (numerical, character, factor, etc.).
+
+Creating a Dataframe with Multiple Variable Types
+You can combine variables of different types into a dataframe:
+```{r}
+df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),  # Character (categorical)
+  Age = c(25, 30, 35),                 # Numeric
+  Score = c(90.5, 85.3, 88.9),         # Double
+  Passed = c(TRUE, TRUE, FALSE)        # Logical
+)
+df
+```
+
+
+Checking Variable Types
+To check the types of variables in a dataframe, use the str() or sapply() functions:
+```{r}
+str(df)          # Overview of dataframe structure
+sapply(df, typeof) # Check each column's type
+```
+
+
+
+Accessing Columns
+You can access specific columns by their names or indices:
+```{r}
+df$Name     # Access 'Name' column
+df[["Age"]] # Another way to access 'Age' column
+df[, 3]     # Access the 3rd column
+```
+
+
+
+Exercise:
+Access the Score column and calculate the average.
+Access the Passed column and count how many TRUE values are present.
+```{r}
+
+```
+
+
+
+Mixing Types of Variables
+Numerical Variables
+Columns with numbers can store integer or double values. Operations can be applied directly:
+
+```{r}
+mean(df$Age)      # Calculate the mean of 'Age'
+sum(df$Score)     # Sum of 'Score'
+df$Age + 5        # Add 5 to all ages
+
+
+df
+```
+
+
+Character Variables
+Character columns store text and are treated as categorical by default in R dataframes:
+```{r}
+toupper(df$Name)  # Convert names to uppercase
+nchar(df$Name)    # Count the number of characters in each name
+```
+
+
+Factor Variables
+Convert character variables to factors to work with specific categories:
+```{r}
+df$Name <- as.factor(df$Name)
+levels(df$Name)  # Check levels of the factor
+```
+
+Logical Variables
+Logical columns store TRUE/FALSE values, useful for filtering:
+```{r}
+df$Passed[df$Passed == TRUE]   # Filter rows where 'Passed' is TRUE
+```
+
+
+Adding and Modifying Variables in a Dataframe
+Adding a New Column
+You can add new variables to the dataframe, derived from existing ones:
+```{r}
+
+df$Grade <- ifelse(df$Score > 88, "A", "B")  # Add a grade column
+df
+```
+
+Changing Variable Types
+If needed, change the type of a column:
+
+```{r}
+df$Age <- as.character(df$Age)  # Convert 'Age' to character
+typeof(df$Age)
+```
+
+
+Dealing with Mixed Variable Types
+Converting Columns
+R automatically tries to unify types in mixed columns, often converting numbers to characters:
+
+```{r}
+mixed <- c(1, "two", 3)
+typeof(mixed)  # Will be character
+```
+
+
+Handling NA (Missing Values)
+Missing values (NA) can appear in any variable type. Handle them using functions like is.na():
+```{r}
+df$Age[2] <- NA     # Introduce an NA value
+mean(df$Age, na.rm = TRUE)  # Calculate mean ignoring NA
+```
+
+
+Exercises
+Create a Dataframe:
+```{r}
+
+```
+
+Create a dataframe with at least three columns:
+One numeric (e.g., age).
+One character (e.g., name).
+One logical (e.g., likes ice cream).
+```{r}
+
+```
+
+
+
+Modify the Dataframe:
+Add a new column that calculates the age in months.
+Convert one column to a different type (e.g., Name to a factor).
+```{r}
+
+```
+
+
+Filter Rows:
+Filter the dataframe to show only rows where LikesIceCream is TRUE.
+Summarize Variables:
+```{r}
+
+```
+
+
+DPplyr/tidyverse
+
+The dplyr package from the tidyverse ecosystem is a powerful tool for working with dataframes in R. Let's learn some basic operations.
+
+Loading the dplyr Package
+Before you begin, make sure to load the package
+If you don’t have it installed, you can install it first
+```{r}
+library(dplyr)
+#install.packages("dplyr")
+```
+
+Basic Operations
+1. Selecting Columns
+Use the select() function to choose specific columns from a dataframe.
+
+```{r}
+df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 35),
+  Score = c(90.5, 85.3, 88.9),
+  Passed = c(TRUE, TRUE, FALSE)
+)
+
+# Select specific columns
+select(df, Name, Age)
+# Exclude specific columns
+select(df, -Passed)
+```
+
+
+Exercise:
+Select only the Score and Passed columns from the dataframe.
+```{r}
+
+```
+
+2. Filtering Rows
+Use filter() to select rows based on conditions.
+
+```{r}
+filter(df, Age > 30)
+filter(df, Passed == TRUE)
+```
+
+Exercise:
+Filter rows where Score is greater than 88.
+```{r}
+
+```
+
+
+3. Adding New Columns
+Use mutate() to add or modify columns.
+```{r}
+mutate(df, Grade = ifelse(Score > 88, "A", "B"))
+
+mutate(df, AgeMonths = Age * 12)
+```
+
+
+Create a new column that calculates the square root of the Score.
+```{r}
+
+```
+
+4. Summarizing Data
+Use summarize() to calculate summary statistics.
+
+```{r}
+summarize(df, AverageScore = mean(Score))
+summarize(df, AverageScore = mean(Score), TotalPassed = sum(Passed))
+```
+
+To summarize groups of data, combine summarize() with group_by():
+```{r}
+
+df %>%
+  group_by(Passed) %>%
+  summarize(
+    AverageScore = mean(Score),
+    Count = n()
+  )
+```
+
+
+Exercise:
+Group by Grade and calculate the total number of people in each grade category.
+```{r}
+
+```
+
+5. Rearranging Rows
+Use arrange() to sort rows.
+```{r}
+arrange(df, Score)
+```
+
+# Sort rows by Score in descending order
+```{r}
+arrange(df, desc(Score))
+```
+
+
+Exercise:
+Sort the dataframe by Age in ascending order.
+```{r}
+
+```
+
+Combining Operations with the Pipe (%>%)
+The pipe operator %>% makes your code more readable by chaining operations together.
+```{r}
+df %>%
+  select(Name, Score) %>%
+  filter(Score > 88) %>%
+  arrange(desc(Score))
+
+```
+Exercise:
+Select the Name and Age columns.
+Filter rows where Age is greater than 28.
+Add a column for age in months.
+Arrange the result by Age in descending order.
+```{r}
+
+```
+
+
+
+**select()**	Choose specific columns.
+**filter()**	Filter rows based on conditions.
+**mutate()**	Add or modify columns.
+**summarize()**	Summarize data (e.g., mean, sum).
+**group_by()**	Group data for grouped summaries.
+**arrange()**	Sort rows in ascending/descending order.
+
+If and loops
+Conditional Statements: if and ifelse
+1. if Statement
+The if statement is used to execute code only if a condition is TRUE.
+```{r}
+x <- 5
+# Check if x is greater than 3
+if (x > 3) {
+  print("x is greater than 3")
+}
+```
+
+You can include an else block to handle the case when the condition is FALSE:
+```{r}
+x <- 2
+
+if (x > 3) {
+  print("x is greater than 3")
+} else {
+  print("x is less than or equal to 3")
+}
+```
+
+Exercise:
+Write an if statement to check if a number y is positive, negative, or zero, and print an appropriate message.
+```{r}
+
+```
+
+2. ifelse() Function
+The ifelse() function is a vectorized version of if and is great for conditional logic in vectors.
+
+```{r}
+x <- c(1, -2, 3, -4, 5)
+# Check if elements are positive or negative
+ifelse(x > 0, "Positive", "Negative")
+```
+
+
+You can also assign the result to a variable:
+```{r}
+status <- ifelse(x > 0, "Positive", "Negative")
+status
+```
+
+Exercise:
+Create a vector z <- c(10, 0, -10, 5, -5) and use ifelse() to label each number as "Positive", "Zero", or "Negative".
+```{r}
+
+```
+
+Loops: for and while
+3. for Loops
+A for loop iterates over a sequence.
+```{r}
+# Print numbers from 1 to 5
+for (i in 1:5) {
+  print(i)
+}
+
+```
+# Loop through a vector
+```{r}
+fruits <- c("Apple", "Banana", "Cherry")
+for (fruit in fruits) {
+  print(fruit)
+}
+```
+
+Exercise:
+Write a for loop to print the square of each number in the vector c(1, 2, 3, 4, 5).
+```{r}
+
+```
+
+4. while Loops
+A while loop continues as long as a condition is TRUE.
+```{r}
+# Print numbers from 1 to 5
+i <- 1
+while (i <= 5) {
+  print(i)
+  i <- i + 1
+}
+```
+
+Exercise:
+Write a while loop to print all even numbers from 10 down to 2.
+```{r}
+
+```
+
+
